@@ -1,113 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vami's Cafe | Official Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vami's Cafe | Official Website</title>
 
-  <style>
-    body { margin:0; font-family: Arial, sans-serif; background:#0b0b0b; color:#fff; }
-    .container { max-width:420px; margin:auto; padding:16px; }
-    .card { background:#151515; border-radius:18px; padding:16px; margin-bottom:16px; box-shadow:0 6px 20px rgba(0,0,0,0.5); }
-    h1,h2 { margin:6px 0; }
-    p { color:#bbb; font-size:14px; }
-    .btn { display:inline-block; padding:10px 14px; border-radius:10px; text-decoration:none; margin:4px; }
-    .btn-primary { background:#fff; color:#000; }
-    .btn-outline { border:1px solid #555; color:#fff; }
-    .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-    .item { background:#1f1f1f; padding:10px; border-radius:12px; text-align:center; transition:0.3s; }
-    .item:hover { transform:scale(1.05); }
-    input, textarea { width:100%; padding:10px; margin:6px 0; border-radius:10px; border:none; background:#1f1f1f; color:#fff; }
-    iframe { width:100%; border:0; border-radius:12px; }
-    .fade { animation:fadeIn 1s ease; }
-    @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
-    .footer { text-align:center; font-size:12px; color:#777; }
-  </style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#0b0b0b;color:#fff;}
+
+.container{max-width:1100px;margin:auto;padding:20px;}
+
+/* HERO */
+.hero{
+  height:80vh;
+  background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border-radius:20px;
+}
+.hero-content{
+  background:rgba(0,0,0,0.6);
+  padding:30px;
+  border-radius:20px;
+  animation:fadeUp 1s ease;
+}
+.hero h1{font-size:40px;}
+.hero p{color:#ccc;margin:10px 0;}
+
+.btn{display:inline-block;padding:10px 18px;border-radius:10px;text-decoration:none;margin:5px;transition:.3s;}
+.btn-primary{background:#fff;color:#000;}
+.btn-primary:hover{background:#ddd;}
+.btn-outline{border:1px solid #fff;color:#fff;}
+.btn-outline:hover{background:#fff;color:#000;}
+
+/* SECTION */
+.section{margin-top:40px;animation:fadeUp 1s ease;}
+.section h2{margin-bottom:10px;font-size:24px;}
+.section p{color:#aaa;}
+
+/* MENU */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-top:15px;}
+.card{background:#151515;padding:15px;border-radius:15px;transition:.3s;}
+.card:hover{transform:translateY(-5px);}
+
+/* FORM */
+input,textarea{
+  width:100%;padding:10px;margin:8px 0;border:none;border-radius:10px;background:#1f1f1f;color:#fff;
+}
+
+/* CONTACT */
+.contact p{margin:5px 0;color:#bbb;}
+
+iframe{width:100%;border-radius:15px;margin-top:10px;}
+
+/* FOOTER */
+.footer{text-align:center;margin-top:30px;color:#666;font-size:13px;}
+
+/* ANIMATION */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}
+}
+
+</style>
 </head>
 
 <body>
-  <div class="container">
+<div class="container">
 
-    <!-- Hero -->
-    <div class="card fade" style="text-align:center;">
-      <h1>Vami's Cafe</h1>
-      <p>Official Website • Cozy Vibes • Great Food</p>
-      <a class="btn btn-primary" href="#menu">View Menu</a>
-      <a class="btn btn-outline" href="#booking">Book Table</a>
-    </div>
-
-    <!-- About -->
-    <div class="card fade">
-      <h2>About Us</h2>
-      <p>A perfect place to hangout with friends, enjoy delicious food and experience a cozy cafe vibe.</p>
-    </div>
-
-    <!-- Menu -->
-    <div id="menu" class="card fade">
-      <h2>Popular Items</h2>
-      <div class="grid">
-        <div class="item">Cold Coffee</div>
-        <div class="item">White Sauce Pasta</div>
-        <div class="item">Biscoff Shake</div>
-        <div class="item">Pizza</div>
-      </div>
-    </div>
-
-    <!-- Booking -->
-    <div id="booking" class="card fade">
-      <h2>Reserve a Table</h2>
-      <input id="name" placeholder="Name" />
-      <input id="phone" placeholder="Phone" />
-      <input id="time" placeholder="Date & Time" />
-      <textarea id="msg" placeholder="Special Request"></textarea>
-      <a class="btn btn-primary" onclick="book()">Book via WhatsApp</a>
-    </div>
-
-    <!-- Timing -->
-    <div class="card fade">
-      <h2>Best Time to Visit</h2>
-      <p>Rush: 6 PM - 9 PM</p>
-      <p>Free: 12 PM - 4 PM</p>
-    </div>
-
-    <!-- Reviews -->
-    <div class="card fade">
-      <h2>Reviews</h2>
-      <p>⭐ 4.5 Rating</p>
-      <p>"Amazing ambiance and taste"</p>
-      <p>"Perfect place for hangout"</p>
-    </div>
-
-    <!-- Contact -->
-    <div class="card fade">
-      <h2>Contact</h2>
-      <p>📍 Add Address Here</p>
-      <p>📞 Add Phone Number</p>
-      <p>⏰ 11 AM - 11 PM</p>
-      <p>📸 Instagram Handle</p>
-      <a class="btn btn-outline" href="https://maps.google.com" target="_blank">Open in Maps</a>
-    </div>
-
-    <!-- Map -->
-    <div class="card fade">
-      <iframe src="https://maps.google.com/maps?q=Kanpur&t=&z=13&ie=UTF8&iwloc=&output=embed" height="200"></iframe>
-    </div>
-
-    <div class="footer">© 2026 Vami's Cafe</div>
-
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Vami's Cafe</h1>
+    <p>Official Website • Cozy Vibes • Great Food</p>
+    <a href="#menu" class="btn btn-primary">View Menu</a>
+    <a href="#booking" class="btn btn-outline">Book Table</a>
   </div>
+</div>
 
-  <script>
-    function book(){
-      let name=document.getElementById('name').value;
-      let phone=document.getElementById('phone').value;
-      let time=document.getElementById('time').value;
-      let msg=document.getElementById('msg').value;
+<!-- ABOUT -->
+<div class="section">
+  <h2>About Us</h2>
+  <p>A perfect place to hangout, enjoy delicious food and create great memories.</p>
+</div>
 
-      let text=`Booking Request:%0AName: ${name}%0APhone: ${phone}%0ATime: ${time}%0AMessage: ${msg}`;
-      window.open(`https://wa.me/91XXXXXXXXXX?text=${text}`,'_blank');
-    }
-  </script>
+<!-- MENU -->
+<div id="menu" class="section">
+  <h2>Popular Items</h2>
+  <div class="grid">
+    <div class="card">Cold Coffee</div>
+    <div class="card">White Sauce Pasta</div>
+    <div class="card">Biscoff Shake</div>
+    <div class="card">Pizza</div>
+  </div>
+</div>
+
+<!-- BOOKING -->
+<div id="booking" class="section">
+  <h2>Reserve a Table</h2>
+  <input id="name" placeholder="Your Name">
+  <input id="phone" placeholder="Phone Number">
+  <input id="time" placeholder="Date & Time">
+  <textarea id="msg" placeholder="Special Request"></textarea>
+  <a class="btn btn-primary" onclick="book()">Book via WhatsApp</a>
+</div>
+
+<!-- TIMING -->
+<div class="section">
+  <h2>Best Time to Visit</h2>
+  <p>Rush: 6 PM - 9 PM</p>
+  <p>Free: 12 PM - 4 PM</p>
+</div>
+
+<!-- CONTACT -->
+<div class="section contact">
+  <h2>Contact</h2>
+  <p>📍 Add Address</p>
+  <p>📞 Add Number</p>
+  <p>⏰ 11 AM - 11 PM</p>
+  <p>📸 Instagram Handle</p>
+</div>
+
+<!-- MAP -->
+<div class="section">
+  <iframe src="https://maps.google.com/maps?q=Kanpur&t=&z=13&ie=UTF8&iwloc=&output=embed" height="250"></iframe>
+</div>
+
+<div class="footer">© 2026 Vami's Cafe</div>
+
+</div>
+
+<script>
+function book(){
+let name=document.getElementById('name').value;
+let phone=document.getElementById('phone').value;
+let time=document.getElementById('time').value;
+let msg=document.getElementById('msg').value;
+
+let text=`Booking Request:%0AName: ${name}%0APhone: ${phone}%0ATime: ${time}%0AMessage: ${msg}`;
+window.open(`https://wa.me/91XXXXXXXXXX?text=${text}`,'_blank');
+}
+</script>
 
 </body>
 </html>
