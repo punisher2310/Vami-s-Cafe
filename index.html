@@ -4,141 +4,139 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vami's Cafe</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Poppins;background:#1b120b;color:#fff;scroll-behavior:smooth;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Poppins;background:#1b120b;color:#fff;overflow-x:hidden}
 
-.nav{display:flex;justify-content:space-between;align-items:center;padding:20px 50px;background:#1b120b;position:sticky;top:0;z-index:1000;}
-.nav h2{font-family:'Playfair Display';}
-.nav a{color:#ccc;margin-left:20px;text-decoration:none;transition:.3s;}
-.nav a:hover{color:#fff;}
+/* LOADER */
+#loader{position:fixed;width:100%;height:100%;background:#1b120b;display:flex;align-items:center;justify-content:center;z-index:9999}
+#loader h1{font-family:'Playfair Display'}
 
-.hero{display:flex;align-items:center;justify-content:space-between;padding:100px 50px;position:relative;}
-.hero::after{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(#c8a27c,transparent);top:10%;right:10%;filter:blur(80px);}
-.hero-text h1{font-family:'Playfair Display';font-size:64px;line-height:1.1;animation:fadeUp 1s ease;}
-.hero-text p{margin:20px 0;color:#bbb;max-width:420px;}
-.hero img{width:450px;animation:float 4s ease-in-out infinite;}
+.nav{display:flex;justify-content:space-between;padding:20px 40px;position:fixed;width:100%;background:#1b120b;z-index:1000}
+.nav a{color:#ccc;margin-left:15px;text-decoration:none}
 
-.btn{padding:12px 22px;background:#c8a27c;color:#000;text-decoration:none;border-radius:6px;margin-right:10px;transition:.3s;}
-.btn:hover{transform:scale(1.05);}
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover fixed}
+.hero h1{font-family:'Playfair Display';font-size:60px}
 
-.light{background:#e8d6c3;color:#1b120b;padding:80px 50px;}
-.split{display:flex;align-items:center;gap:50px;margin-bottom:50px;}
-.split img{width:300px;border-radius:15px;transition:.3s;}
-.split img:hover{transform:rotate(-2deg) scale(1.05);}
+.section{padding:80px 40px}
 
-.products{background:#c8a27c;padding:80px 50px;text-align:center;color:#1b120b;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:30px;}
-.card{background:#1b120b;color:#fff;padding:20px;border-radius:12px;transition:.3s;}
-.card:hover{transform:translateY(-10px) scale(1.03);}
-.card img{width:100%;border-radius:10px;margin-bottom:10px;}
+/* PARALLAX */
+.parallax{background:url('https://images.unsplash.com/photo-1511920170033-f8396924c348') center/cover fixed;height:300px;border-radius:20px}
 
-.reviews{background:#e8d6c3;color:#1b120b;padding:80px 50px;text-align:center;}
-.review-box{background:#1b120b;color:#fff;padding:30px;border-radius:12px;max-width:650px;margin:auto;box-shadow:0 10px 30px rgba(0,0,0,0.3);}
+/* MENU */
+.filter{display:flex;gap:10px;margin-bottom:20px}
+.filter button{padding:8px 15px;border:none;background:#2a1f17;color:#fff;border-radius:20px;cursor:pointer}
+.filter button.active{background:#c8a27c;color:#000}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:#2a1f17;padding:15px;border-radius:12px;transition:.3s}
+.card:hover{transform:translateY(-10px) scale(1.03)}
+.card img{width:100%;border-radius:10px;transition:.3s}
+.card img:hover{transform:scale(1.1)}
 
-.footer{background:#1b120b;padding:60px;color:#ccc;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;}
-.footer p{margin:5px 0;}
+/* SLIDER */
+.slider-container{position:relative;overflow:hidden}
+.slider{display:flex;transition:0.5s}
+.slide{min-width:100%;text-align:center;padding:40px}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);background:#c8a27c;border:none;padding:10px;cursor:pointer}
+.left{left:10px}
+.right{right:10px}
 
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;padding:14px 16px;border-radius:50%;text-decoration:none;font-size:20px;box-shadow:0 5px 20px rgba(0,0,0,0.5);}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:12px;border-radius:50%;color:#fff;text-decoration:none}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
-@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-15px);}}
-
-@media(max-width:768px){
-.hero{flex-direction:column;text-align:center;}
-.hero img{width:300px;margin-top:20px;}
-.split{flex-direction:column;text-align:center;}
-}
+.fade{opacity:0;transform:translateY(40px);transition:1s}
+.show{opacity:1;transform:translateY(0)}
 </style>
 </head>
 
 <body>
 
+<div id="loader"><h1>Vami's Cafe</h1></div>
+
 <div class="nav">
 <h2>Vami's Cafe</h2>
-<div>
-<a href="#">Home</a>
-<a href="#menu">Menu</a>
-<a href="#contact">Contact</a>
-</div>
+<div><a href="#menu">Menu</a><a href="#contact">Contact</a></div>
 </div>
 
 <div class="hero">
-<div class="hero-text">
-<h1>Discover The Art Of Perfect Coffee</h1>
-<p>Experience rich flavors and premium cafe vibes crafted just for you.</p>
-<a href="#menu" class="btn">Order Now</a>
-<a href="#" class="btn">Explore More</a>
-</div>
-<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
+<h1>Premium Cafe Experience</h1>
 </div>
 
-<div class="light">
-<div class="split">
-<img src="https://images.unsplash.com/photo-1511920170033-f8396924c348">
-<div>
-<h2>Coffee Heaven</h2>
-<p>Premium taste with cozy ambience.</p>
-</div>
+<div class="section parallax"></div>
+
+<div id="menu" class="section fade">
+<h2>Menu</h2>
+<div class="filter">
+<button onclick="filterMenu('all')" class="active">All</button>
+<button onclick="filterMenu('food')">Food</button>
+<button onclick="filterMenu('coffee')">Coffee</button>
 </div>
 
-<div class="split">
-<div>
-<h2>Jean's Coffee</h2>
-<p>Crafted with passion and quality.</p>
-</div>
-<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085">
-</div>
-</div>
-
-<div id="menu" class="products">
-<h2>Best Selling Item</h2>
 <div class="grid">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1517705008128-361805f42e86">
-<h3>Cappuccino</h3>
-</div>
-<div class="card">
-<img src="https://images.unsplash.com/photo-1498804103079-a6351b050096">
-<h3>Americano</h3>
-</div>
-<div class="card">
-<img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93">
-<h3>Espresso</h3>
-</div>
+<!-- FOOD -->
+<div class="card food"><img src="https://images.unsplash.com/photo-1601924582975-7e1c47d66d6d"><h3>Cheese Margherita Pizza</h3></div>
+<div class="card food"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349"><h3>Veg Burger</h3></div>
+<div class="card food"><img src="https://images.unsplash.com/photo-1625944192163-8f2b5d2d7695"><h3>White Sauce Pasta</h3></div>
+<div class="card food"><img src="https://images.unsplash.com/photo-1605475128025-3d6c0bca5b45"><h3>Grilled Sandwich</h3></div>
+<div class="card food"><img src="https://images.unsplash.com/photo-1585238342028-4a3b8f6bdb89"><h3>Vanilla Shake</h3></div>
+<div class="card food"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307"><h3>Virgin Mint Mojito</h3></div>
+<div class="card food"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"><h3>Brownie Sundae</h3></div>
+
+<!-- COFFEE -->
+<div class="card coffee"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"><h3>Espresso</h3></div>
+<div class="card coffee"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096"><h3>Americano</h3></div>
+<div class="card coffee"><img src="https://images.unsplash.com/photo-1517705008128-361805f42e86"><h3>Cappuccino</h3></div>
+<div class="card coffee"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589"><h3>Latte Vanilla</h3></div>
 </div>
 </div>
 
-<div class="reviews">
-<h2>What Our Customer Says</h2>
-<div class="review-box">
-<p>⭐️⭐️⭐️⭐️⭐️</p>
-<p>"Amazing taste and premium vibe. Loved it!"</p>
-<strong>- Customer</strong>
+<div class="section fade">
+<h2>Reviews</h2>
+<div class="slider-container">
+<button class="arrow left" onclick="moveSlide(-1)">❮</button>
+<div class="slider" id="slider">
+<div class="slide">⭐️⭐️⭐️⭐️⭐️ Amazing vibe</div>
+<div class="slide">⭐️⭐️⭐️⭐️⭐️ Loved coffee</div>
+<div class="slide">⭐️⭐️⭐️⭐️⭐️ Great place</div>
+</div>
+<button class="arrow right" onclick="moveSlide(1)">❯</button>
 </div>
 </div>
 
-<div id="contact" class="footer">
-<div>
-<h3>Vami's Cafe</h3>
-<p>Enjoy better coffee with us.</p>
-</div>
-<div>
-<h3>Contact</h3>
-<p>📍 Address</p>
-<p>📞 Phone</p>
-<p>⏰ 11 AM - 11 PM</p>
-</div>
-<div>
-<h3>Follow</h3>
-<p>Instagram</p>
-</div>
+<div id="contact" class="section fade">
+<h2>Contact</h2>
+<p>📍 Add Address</p>
+<p>📞 Add Number</p>
+<a href="https://www.google.com/maps?q=Kapai+Coffee+House+Kanpur" target="_blank">Open Map</a>
+<a href="https://instagram.com" target="_blank">Instagram</a>
 </div>
 
 <a href="https://wa.me/91XXXXXXXXXX" class="whatsapp">💬</a>
+
+<script>
+window.onload=()=>{setTimeout(()=>{document.getElementById('loader').style.display='none'},1500)}
+
+function filterMenu(cat){
+let items=document.querySelectorAll('.card');
+items.forEach(i=>{
+i.style.display=(cat==='all'||i.classList.contains(cat))?'block':'none'
+})
+}
+
+let index=0
+function moveSlide(dir){
+let slides=document.querySelectorAll('.slide')
+index=(index+dir+slides.length)%slides.length
+document.getElementById('slider').style.transform=`translateX(-${index*100}%)`
+}
+
+// SCROLL ANIMATION
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
+})
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el))
+</script>
 
 </body>
 </html>
