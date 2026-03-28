@@ -25,6 +25,8 @@ body{
   align-items:center;
   justify-content:center;
   z-index:9999;
+  opacity:1;
+  transition:0.5s ease;
 }
 #loader h1{
   font-family:'Playfair Display';
@@ -67,14 +69,14 @@ body{
   inset:0;
   background:rgba(0,0,0,0.65);
 }
-.hero h1{
-  font-family:'Playfair Display';
-  font-size:64px;
-}
 .hero-content{
   position:relative;
   z-index:2;
   max-width:700px;
+}
+.hero h1{
+  font-family:'Playfair Display';
+  font-size:64px;
 }
 .hero p{
   margin-top:12px;
@@ -211,7 +213,9 @@ body{
 <body>
 
 <!-- LOADER -->
-<div id="loader"><h1>Vami's Cafe</h1></div>
+<div id="loader">
+  <h1>Vami's Cafe</h1>
+</div>
 
 <!-- NAV -->
 <div class="nav">
@@ -286,14 +290,19 @@ body{
 <a class="whatsapp" href="https://wa.me/91XXXXXXXXXX">💬</a>
 
 <script>
-// loader
-window.onload = () => {
-  setTimeout(() => {
-    document.getElementById('loader').style.display = 'none';
-  }, 1200);
-};
+// LOADER FIXED
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
 
-// filter
+  setTimeout(() => {
+    loader.style.opacity = "0";
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 500);
+  }, 1200);
+});
+
+// FILTER
 function filterMenu(cat){
   let items = document.querySelectorAll('.card');
   items.forEach(i=>{
@@ -301,7 +310,7 @@ function filterMenu(cat){
   });
 }
 
-// slider FIXED
+// SLIDER FIXED
 let index = 0;
 function moveSlide(dir){
   let slider = document.getElementById('slider');
@@ -312,12 +321,13 @@ function moveSlide(dir){
   slider.style.transform = `translateX(-${index * 100}%)`;
 }
 
-// fade animation
+// FADE ANIMATION
 const observer = new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting) e.target.classList.add('show');
   });
 });
+
 document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
 </script>
 
