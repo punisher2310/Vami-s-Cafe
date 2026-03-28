@@ -5,33 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Vami's Cafe</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{
-  font-family:Poppins;
-  background:#120b07;
+  font-family:Inter;
+  background:#0b0806;
   color:#fff;
   overflow-x:hidden;
+  cursor:none;
 }
 
-/* LOADER */
-#loader{
+/* CUSTOM CURSOR */
+.cursor{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#c8a27c;
   position:fixed;
-  inset:0;
-  background:#120b07;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  top:0;left:0;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
   z-index:9999;
-  opacity:1;
-  transition:0.5s ease;
-}
-#loader h1{
-  font-family:'Playfair Display';
-  font-size:28px;
-  letter-spacing:2px;
+  mix-blend-mode:difference;
 }
 
 /* NAV */
@@ -41,14 +43,17 @@ body{
   width:100%;
   display:flex;
   justify-content:space-between;
-  padding:18px 40px;
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(10px);
+  padding:20px 50px;
+  background:rgba(0,0,0,0.2);
+  backdrop-filter:blur(18px);
   z-index:1000;
+}
+.nav h2{
+  font-family:'Playfair Display';
 }
 .nav a{
   color:#ddd;
-  margin-left:16px;
+  margin-left:20px;
   text-decoration:none;
   font-size:14px;
 }
@@ -60,275 +65,223 @@ body{
   align-items:center;
   justify-content:center;
   text-align:center;
-  background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover fixed;
   position:relative;
+}
+.hero video{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.65);
+  background:rgba(0,0,0,0.55);
 }
 .hero-content{
   position:relative;
   z-index:2;
-  max-width:700px;
 }
 .hero h1{
   font-family:'Playfair Display';
-  font-size:64px;
+  font-size:80px;
+  letter-spacing:2px;
 }
 .hero p{
-  margin-top:12px;
-  color:#ccc;
+  margin-top:10px;
+  color:#cfcfcf;
 }
 
 /* SECTION */
 .section{
-  padding:90px 40px;
-  max-width:1100px;
+  padding:140px 60px;
+  max-width:1200px;
   margin:auto;
 }
 .section h2{
   font-family:'Playfair Display';
-  font-size:36px;
+  font-size:44px;
   margin-bottom:20px;
 }
-
-/* PARALLAX */
-.parallax{
-  background:url('https://images.unsplash.com/photo-1511920170033-f8396924c348') center/cover fixed;
-  height:320px;
-  border-radius:18px;
-  margin:60px 0;
+.section p{
+  color:#bdbdbd;
+  line-height:1.8;
+  font-size:16px;
 }
 
-/* MENU FILTER */
-.filter{
-  display:flex;
-  gap:10px;
-  margin-bottom:25px;
-}
-.filter button{
-  padding:8px 14px;
-  border:none;
-  background:#2a1f17;
-  color:#fff;
-  border-radius:20px;
-  cursor:pointer;
-}
-.filter button.active{
-  background:#c8a27c;
-  color:#000;
-}
-
-/* GRID */
-.grid{
+/* STORY SPLIT */
+.split{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:18px;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+  align-items:center;
+}
+.split img{
+  width:100%;
+  border-radius:20px;
+  transform:scale(1.05);
+}
+
+/* HORIZONTAL EXPERIENCE (APPLE STYLE) */
+.horizontal{
+  display:flex;
+  gap:40px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  padding-bottom:20px;
 }
 .card{
-  background:#1c120d;
-  padding:12px;
-  border-radius:12px;
-  transition:0.3s;
-}
-.card:hover{
-  transform:translateY(-8px);
+  min-width:350px;
+  height:420px;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  scroll-snap-align:center;
 }
 .card img{
   width:100%;
-  border-radius:10px;
-  height:160px;
+  height:100%;
   object-fit:cover;
+  transform:scale(1.2);
+  transition:1s;
 }
-.card h3{
-  margin-top:10px;
-  font-size:15px;
+.card:hover img{
+  transform:scale(1);
 }
-
-/* SLIDER */
-.slider-container{
-  position:relative;
-  overflow:hidden;
-  margin-top:20px;
-}
-.slider{
-  display:flex;
-  transition:0.5s ease;
-}
-.slide{
-  min-width:100%;
-  text-align:center;
-  padding:40px;
-  font-size:18px;
-}
-.arrow{
+.card span{
   position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:#c8a27c;
-  border:none;
-  padding:10px;
-  cursor:pointer;
-}
-.left{left:10px}
-.right{right:10px}
-
-/* FADE */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:0.8s;
-}
-.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* CONTACT */
-.contact a{
-  display:inline-block;
-  margin-top:10px;
-  color:#c8a27c;
-  text-decoration:none;
-}
-
-/* WHATSAPP */
-.whatsapp{
-  position:fixed;
   bottom:20px;
-  right:20px;
-  background:#25D366;
-  padding:12px;
-  border-radius:50%;
-  text-decoration:none;
-  color:#000;
-  font-weight:bold;
+  left:20px;
+  background:rgba(0,0,0,0.5);
+  padding:8px 12px;
+  border-radius:30px;
 }
+
+/* MENU LUXURY LIST */
+.menu-item{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  transition:0.4s;
+}
+.menu-item:hover{
+  transform:translateX(10px);
+  color:#c8a27c;
+}
+
+/* REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(60px);
+}
+
+/* CTA */
+.cta{
+  text-align:center;
+  padding:140px 40px;
+}
+.btn{
+  display:inline-block;
+  margin-top:20px;
+  padding:14px 28px;
+  background:#c8a27c;
+  color:#000;
+  border-radius:40px;
+  text-decoration:none;
+  font-weight:500;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <h1>Vami's Cafe</h1>
-</div>
+<div class="cursor"></div>
 
 <!-- NAV -->
 <div class="nav">
-  <h2 style="font-family:'Playfair Display'">Vami's Cafe</h2>
+  <h2>Vami’s Cafe</h2>
   <div>
+    <a href="#story">Story</a>
+    <a href="#experience">Experience</a>
     <a href="#menu">Menu</a>
-    <a href="#contact">Contact</a>
   </div>
 </div>
 
-<!-- HERO -->
-<div class="hero">
+<!-- HERO VIDEO -->
+<section class="hero">
+  <video autoplay muted loop>
+    <source src="https://cdn.coverr.co/videos/coverr-coffee-pouring-5943/1080p.mp4">
+  </video>
   <div class="hero-content">
-    <h1>Premium Cafe Experience</h1>
-    <p>Where coffee, comfort and conversations meet.</p>
+    <h1>Vami’s Cafe</h1>
+    <p>A crafted space of calm, coffee and connection</p>
   </div>
-</div>
+</section>
 
-<!-- PARALLAX -->
-<div class="section">
-  <div class="parallax"></div>
-</div>
+<!-- STORY -->
+<section id="story" class="section reveal">
+  <h2>Our Philosophy</h2>
+  <div class="split">
+    <p>
+      Vami’s Cafe is built on a simple belief — luxury is not noise, it is silence, warmth and detail.
+      Every cup, every corner, every light is designed to slow time down.
+    </p>
+    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24">
+  </div>
+</section>
+
+<!-- EXPERIENCE APPLE STYLE -->
+<section id="experience" class="section reveal">
+  <h2>Experience</h2>
+  <div class="horizontal">
+    <div class="card"><img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814"><span>Warm Ambience</span></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5"><span>Cozy Seating</span></div>
+    <div class="card"><img src="https://images.unsplash.com/photo-1511920170033-f8396924c348"><span>Evening Glow</span></div>
+  </div>
+</section>
 
 <!-- MENU -->
-<div id="menu" class="section fade">
-  <h2>Menu</h2>
+<section id="menu" class="section reveal">
+  <h2>Signature Menu</h2>
 
-  <div class="filter">
-    <button class="active" onclick="filterMenu('all')">All</button>
-    <button onclick="filterMenu('food')">Food</button>
-    <button onclick="filterMenu('coffee')">Coffee</button>
-  </div>
+  <div class="menu-item"><span>Espresso</span><span>₹120</span></div>
+  <div class="menu-item"><span>Biscoff Shake</span><span>₹180</span></div>
+  <div class="menu-item"><span>Margherita Pizza</span><span>₹220</span></div>
+  <div class="menu-item"><span>Cold Coffee</span><span>₹150</span></div>
+</section>
 
-  <div class="grid">
-    <div class="card food"><img src="https://images.unsplash.com/photo-1601924582975-7e1c47d66d6d"><h3>Pizza</h3></div>
-    <div class="card food"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349"><h3>Burger</h3></div>
-    <div class="card food"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"><h3>Brownie</h3></div>
-
-    <div class="card coffee"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"><h3>Espresso</h3></div>
-    <div class="card coffee"><img src="https://images.unsplash.com/photo-1517705008128-361805f42e86"><h3>Cappuccino</h3></div>
-  </div>
-</div>
-
-<!-- REVIEWS -->
-<div class="section fade">
-  <h2>Reviews</h2>
-
-  <div class="slider-container">
-    <button class="arrow left" onclick="moveSlide(-1)">❮</button>
-
-    <div class="slider" id="slider">
-      <div class="slide">⭐ Amazing ambience</div>
-      <div class="slide">⭐ Best coffee in town</div>
-      <div class="slide">⭐ Perfect hangout place</div>
-    </div>
-
-    <button class="arrow right" onclick="moveSlide(1)">❯</button>
-  </div>
-</div>
-
-<!-- CONTACT -->
-<div id="contact" class="section contact fade">
-  <h2>Contact</h2>
-  <p>📍 Kanpur, Uttar Pradesh</p>
-  <p>📞 +91 XXXXX XXXXX</p>
-
-  <a href="https://www.google.com/maps">Open Map</a><br>
-  <a href="https://instagram.com">Instagram</a>
-</div>
-
-<!-- WHATSAPP -->
-<a class="whatsapp" href="https://wa.me/91XXXXXXXXXX">💬</a>
+<!-- CTA -->
+<section class="cta reveal">
+  <h2>Visit Vami’s Cafe</h2>
+  <p>Kanpur • Crafted Experience • Premium Comfort</p>
+  <a class="btn" href="https://wa.me/91XXXXXXXXXX">Reserve on WhatsApp</a>
+</section>
 
 <script>
-// LOADER FIXED
-window.addEventListener("load", () => {
-  const loader = document.getElementById("loader");
-
-  setTimeout(() => {
-    loader.style.opacity = "0";
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, 500);
-  }, 1200);
+// CURSOR
+const cursor=document.querySelector('.cursor');
+document.addEventListener('mousemove',(e)=>{
+  cursor.style.left=e.clientX+'px';
+  cursor.style.top=e.clientY+'px';
 });
 
-// FILTER
-function filterMenu(cat){
-  let items = document.querySelectorAll('.card');
-  items.forEach(i=>{
-    i.style.display = (cat==='all' || i.classList.contains(cat)) ? 'block':'none';
-  });
-}
+// GSAP REVEAL
+gsap.registerPlugin(ScrollTrigger);
 
-// SLIDER FIXED
-let index = 0;
-function moveSlide(dir){
-  let slider = document.getElementById('slider');
-  let slides = document.querySelectorAll('.slide');
-
-  index = (index + dir + slides.length) % slides.length;
-
-  slider.style.transform = `translateX(-${index * 100}%)`;
-}
-
-// FADE ANIMATION
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('show');
+gsap.utils.toArray('.reveal').forEach(el=>{
+  gsap.to(el,{ 
+    opacity:1,
+    y:0,
+    duration:1,
+    scrollTrigger:{
+      trigger:el,
+      start:"top 80%"
+    }
   });
 });
-
-document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
 </script>
 
 </body>
