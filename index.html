@@ -1,142 +1,195 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vami's Cafe</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { MapPin, Phone, Instagram, Menu } from "lucide-react";
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Poppins;background:#1b120b;color:#fff;overflow-x:hidden}
+export default function CafeLandingPage() {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-/* LOADER */
-#loader{position:fixed;width:100%;height:100%;background:#1b120b;display:flex;align-items:center;justify-content:center;z-index:9999}
-#loader h1{font-family:'Playfair Display'}
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
-.nav{display:flex;justify-content:space-between;padding:20px 40px;position:fixed;width:100%;background:#1b120b;z-index:1000}
-.nav a{color:#ccc;margin-left:15px;text-decoration:none}
+  return (
+    <div className="bg-zinc-950 text-white scroll-smooth">
+      {/* NAVBAR */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-6xl mx-auto flex items-center justify-between p-4">
+          <h1 className="font-bold tracking-wide">Vami&apos;s Cafe</h1>
 
-.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover fixed}
-.hero h1{font-family:'Playfair Display';font-size:60px}
+          <div className="hidden md:flex gap-6 text-sm text-zinc-300">
+            <button onClick={() => scrollTo("home")}>Home</button>
+            <button onClick={() => scrollTo("about")}>About</button>
+            <button onClick={() => scrollTo("menu")}>Menu</button>
+            <button onClick={() => scrollTo("experience")}>Experience</button>
+            <button onClick={() => scrollTo("contact")}>Contact</button>
+          </div>
 
-.section{padding:80px 40px}
+          <div className="md:hidden">
+            <Menu onClick={() => setMenuOpen(!menuOpen)} />
+          </div>
+        </div>
 
-/* PARALLAX */
-.parallax{background:url('https://images.unsplash.com/photo-1511920170033-f8396924c348') center/cover fixed;height:300px;border-radius:20px}
+        {menuOpen && (
+          <div className="md:hidden flex flex-col p-4 gap-3 bg-black/90">
+            <button onClick={() => scrollTo("home")}>Home</button>
+            <button onClick={() => scrollTo("about")}>About</button>
+            <button onClick={() => scrollTo("menu")}>Menu</button>
+            <button onClick={() => scrollTo("experience")}>Experience</button>
+            <button onClick={() => scrollTo("contact")}>Contact</button>
+          </div>
+        )}
+      </div>
 
-/* MENU */
-.filter{display:flex;gap:10px;margin-bottom:20px}
-.filter button{padding:8px 15px;border:none;background:#2a1f17;color:#fff;border-radius:20px;cursor:pointer}
-.filter button.active{background:#c8a27c;color:#000}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#2a1f17;padding:15px;border-radius:12px;transition:.3s}
-.card:hover{transform:translateY(-10px) scale(1.03)}
-.card img{width:100%;border-radius:10px;transition:.3s}
-.card img:hover{transform:scale(1.1)}
+      {/* HERO */}
+      <section
+        id="home"
+        className="h-screen flex items-center justify-center text-center px-6 bg-cover bg-center relative"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1509042239860-f550ce710b93')",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/70" />
 
-/* SLIDER */
-.slider-container{position:relative;overflow:hidden}
-.slider{display:flex;transition:0.5s}
-.slide{min-width:100%;text-align:center;padding:40px}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);background:#c8a27c;border:none;padding:10px;cursor:pointer}
-.left{left:10px}
-.right{right:10px}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="relative z-10 max-w-3xl"
+        >
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
+            Vami&apos;s Cafe
+          </h1>
+          <p className="mt-4 text-lg text-zinc-300">
+            Where coffee meets calm, and moments become memories.
+          </p>
+          <div className="mt-8 flex gap-4 justify-center">
+            <Button onClick={() => scrollTo("menu")}>Explore Menu</Button>
+            <Button
+              variant="outline"
+              onClick={() => scrollTo("contact")}
+            >
+              Visit Us
+            </Button>
+          </div>
+        </motion.div>
+      </section>
 
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:12px;border-radius:50%;color:#fff;text-decoration:none}
+      {/* ABOUT */}
+      <section id="about" className="py-24 px-6 max-w-5xl mx-auto text-center">
+        <h2 className="text-3xl font-semibold">Our Story</h2>
+        <p className="mt-4 text-zinc-400 leading-relaxed">
+          Vami&apos;s Cafe is more than a café — it&apos;s an experience built for
+          conversations, comfort, and connection. Every detail is designed to
+          make your time feel slower, better, and more meaningful.
+        </p>
+      </section>
 
-.fade{opacity:0;transform:translateY(40px);transition:1s}
-.show{opacity:1;transform:translateY(0)}
-</style>
-</head>
+      {/* MENU */}
+      <section id="menu" className="py-24 px-6 bg-zinc-900">
+        <h2 className="text-3xl font-semibold text-center mb-12">
+          Signature Menu
+        </h2>
 
-<body>
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {[
+            "Espresso",
+            "Biscoff Shake",
+            "Margherita Pizza",
+            "Cold Coffee",
+            "Kulhad Coffee",
+            "Loaded Fries",
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 200 }}
+            >
+              <Card className="bg-zinc-800 border-zinc-700">
+                <CardContent className="p-6 text-center">
+                  <p className="text-lg font-medium">{item}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
-<div id="loader"><h1>Vami's Cafe</h1></div>
+      {/* EXPERIENCE */}
+      <section id="experience" className="py-24 px-6 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-semibold text-center mb-12">
+          Experience
+        </h2>
 
-<div class="nav">
-<h2>Vami's Cafe</h2>
-<div><a href="#menu">Menu</a><a href="#contact">Contact</a></div>
-</div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            "Cozy Seating",
+            "Aesthetic Interiors",
+            "Perfect Hangout Spot",
+          ].map((text, i) => (
+            <div
+              key={i}
+              className="h-72 rounded-2xl relative overflow-hidden"
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center scale-110 hover:scale-100 transition-transform duration-700"
+                style={{
+                  backgroundImage:
+                    "url('https://images.unsplash.com/photo-1554118811-1e0d58224f24')",
+                }}
+              />
+              <div className="absolute inset-0 bg-black/50" />
+              <div className="relative z-10 h-full flex items-end p-6">
+                <p className="text-lg font-medium">{text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-<div class="hero">
-<h1>Premium Cafe Experience</h1>
-</div>
+      {/* CONTACT */}
+      <section id="contact" className="py-24 px-6 bg-zinc-900 text-center">
+        <h2 className="text-3xl font-semibold mb-8">Visit Us</h2>
 
-<div class="section parallax"></div>
+        <div className="flex flex-col md:flex-row justify-center gap-6 items-center text-zinc-300">
+          <div className="flex items-center gap-2">
+            <MapPin size={18} />
+            Kanpur, Uttar Pradesh
+          </div>
+          <div className="flex items-center gap-2">
+            <Phone size={18} />
+            Call Now
+          </div>
+          <div className="flex items-center gap-2">
+            <Instagram size={18} />
+            @vamiscafe
+          </div>
+        </div>
 
-<div id="menu" class="section fade">
-<h2>Menu</h2>
-<div class="filter">
-<button onclick="filterMenu('all')" class="active">All</button>
-<button onclick="filterMenu('food')">Food</button>
-<button onclick="filterMenu('coffee')">Coffee</button>
-</div>
+        <div className="mt-8 flex justify-center gap-4">
+          <Button
+            onClick={() => window.open("https://wa.me/91XXXXXXXXXX")}
+          >
+            WhatsApp Order
+          </Button>
+          <Button variant="outline">Get Directions</Button>
+        </div>
+      </section>
 
-<div class="grid">
-<!-- FOOD -->
-<div class="card food"><img src="https://images.unsplash.com/photo-1601924582975-7e1c47d66d6d"><h3>Cheese Margherita Pizza</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349"><h3>Veg Burger</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1625944192163-8f2b5d2d7695"><h3>White Sauce Pasta</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1605475128025-3d6c0bca5b45"><h3>Grilled Sandwich</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1585238342028-4a3b8f6bdb89"><h3>Vanilla Shake</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307"><h3>Virgin Mint Mojito</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"><h3>Brownie Sundae</h3></div>
+      {/* FLOATING CTA */}
+      <a
+        href="https://wa.me/91XXXXXXXXXX"
+        className="fixed bottom-6 right-6 bg-green-500 text-black px-4 py-3 rounded-full shadow-lg font-medium"
+      >
+        Order Now
+      </a>
 
-<!-- COFFEE -->
-<div class="card coffee"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"><h3>Espresso</h3></div>
-<div class="card coffee"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096"><h3>Americano</h3></div>
-<div class="card coffee"><img src="https://images.unsplash.com/photo-1517705008128-361805f42e86"><h3>Cappuccino</h3></div>
-<div class="card coffee"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589"><h3>Latte Vanilla</h3></div>
-</div>
-</div>
-
-<div class="section fade">
-<h2>Reviews</h2>
-<div class="slider-container">
-<button class="arrow left" onclick="moveSlide(-1)">❮</button>
-<div class="slider" id="slider">
-<div class="slide">⭐️⭐️⭐️⭐️⭐️ Amazing vibe</div>
-<div class="slide">⭐️⭐️⭐️⭐️⭐️ Loved coffee</div>
-<div class="slide">⭐️⭐️⭐️⭐️⭐️ Great place</div>
-</div>
-<button class="arrow right" onclick="moveSlide(1)">❯</button>
-</div>
-</div>
-
-<div id="contact" class="section fade">
-<h2>Contact</h2>
-<p>📍 Add Address</p>
-<p>📞 Add Number</p>
-<a href="https://www.google.com/maps?q=Kapai+Coffee+House+Kanpur" target="_blank">Open Map</a>
-<a href="https://instagram.com" target="_blank">Instagram</a>
-</div>
-
-<a href="https://wa.me/91XXXXXXXXXX" class="whatsapp">💬</a>
-
-<script>
-window.onload=()=>{setTimeout(()=>{document.getElementById('loader').style.display='none'},1500)}
-
-function filterMenu(cat){
-let items=document.querySelectorAll('.card');
-items.forEach(i=>{
-i.style.display=(cat==='all'||i.classList.contains(cat))?'block':'none'
-})
+      {/* FOOTER */}
+      <footer className="py-10 text-center text-zinc-500 text-sm">
+        © {new Date().getFullYear()} Vami's Cafe. Crafted for experience.
+      </footer>
+    </div>
+  );
 }
-
-let index=0
-function moveSlide(dir){
-let slides=document.querySelectorAll('.slide')
-index=(index+dir+slides.length)%slides.length
-document.getElementById('slider').style.transform=`translateX(-${index*100}%)`
-}
-
-// SCROLL ANIMATION
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
-})
-document.querySelectorAll('.fade').forEach(el=>observer.observe(el))
-</script>
-
-</body>
-</html>
