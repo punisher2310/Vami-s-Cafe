@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vami's Cafe</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"><style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Poppins;background:#1b120b;color:#fff;overflow-x:hidden}
 
@@ -47,33 +44,18 @@ body{font-family:Poppins;background:#1b120b;color:#fff;overflow-x:hidden}
 
 .fade{opacity:0;transform:translateY(40px);transition:1s}
 .show{opacity:1;transform:translateY(0)}
-</style>
-</head>
-
-<body>
-
-<div id="loader"><h1>Vami's Cafe</h1></div>
-
-<div class="nav">
+</style></head><body><div id="loader"><h1>Vami's Cafe</h1></div><div class="nav">
 <h2>Vami's Cafe</h2>
 <div><a href="#menu">Menu</a><a href="#contact">Contact</a></div>
-</div>
-
-<div class="hero">
+</div><div class="hero">
 <h1>Premium Cafe Experience</h1>
-</div>
-
-<div class="section parallax"></div>
-
-<div id="menu" class="section fade">
+</div><div class="section parallax"></div><div id="menu" class="section fade">
 <h2>Menu</h2>
 <div class="filter">
 <button onclick="filterMenu('all')" class="active">All</button>
 <button onclick="filterMenu('food')">Food</button>
 <button onclick="filterMenu('coffee')">Coffee</button>
-</div>
-
-<div class="grid">
+</div><div class="grid">
 <!-- FOOD -->
 <div class="card food"><img src="https://images.unsplash.com/photo-1601924582975-7e1c47d66d6d"><h3>Cheese Margherita Pizza</h3></div>
 <div class="card food"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349"><h3>Veg Burger</h3></div>
@@ -81,17 +63,12 @@ body{font-family:Poppins;background:#1b120b;color:#fff;overflow-x:hidden}
 <div class="card food"><img src="https://images.unsplash.com/photo-1605475128025-3d6c0bca5b45"><h3>Grilled Sandwich</h3></div>
 <div class="card food"><img src="https://images.unsplash.com/photo-1585238342028-4a3b8f6bdb89"><h3>Vanilla Shake</h3></div>
 <div class="card food"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307"><h3>Virgin Mint Mojito</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"><h3>Brownie Sundae</h3></div>
-
-<!-- COFFEE -->
-<div class="card coffee"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"><h3>Espresso</h3></div>
+<div class="card food"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"><h3>Brownie Sundae</h3></div><!-- COFFEE --><div class="card coffee"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"><h3>Espresso</h3></div>
 <div class="card coffee"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096"><h3>Americano</h3></div>
 <div class="card coffee"><img src="https://images.unsplash.com/photo-1517705008128-361805f42e86"><h3>Cappuccino</h3></div>
 <div class="card coffee"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589"><h3>Latte Vanilla</h3></div>
 </div>
-</div>
-
-<div class="section fade">
+</div><div class="section fade">
 <h2>Reviews</h2>
 <div class="slider-container">
 <button class="arrow left" onclick="moveSlide(-1)">❮</button>
@@ -102,17 +79,13 @@ body{font-family:Poppins;background:#1b120b;color:#fff;overflow-x:hidden}
 </div>
 <button class="arrow right" onclick="moveSlide(1)">❯</button>
 </div>
-</div>
-
-<div id="contact" class="section fade">
+</div><div id="contact" class="section fade">
 <h2>Contact</h2>
 <p>📍 Add Address</p>
 <p>📞 Add Number</p>
 <a href="https://www.google.com/maps?q=Kapai+Coffee+House+Kanpur" target="_blank">Open Map</a>
 <a href="https://instagram.com" target="_blank">Instagram</a>
-</div>
-
-<a href="https://wa.me/91XXXXXXXXXX" class="whatsapp">💬</a>
+</div><a href="https://wa.me/91XXXXXXXXXX" class="whatsapp">💬</a>
 
 <script>
 window.onload=()=>{setTimeout(()=>{document.getElementById('loader').style.display='none'},1500)}
@@ -128,7 +101,7 @@ let index=0
 function moveSlide(dir){
 let slides=document.querySelectorAll('.slide')
 index=(index+dir+slides.length)%slides.length
-document.getElementById('slider').style.transform=`translateX(-${index*100}%)`
+document.getElementById('slider').style.transform=translateX(-${index*100}%)
 }
 
 // SCROLL ANIMATION
@@ -136,8 +109,5 @@ const observer=new IntersectionObserver(entries=>{
 entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
 })
 document.querySelectorAll('.fade').forEach(el=>observer.observe(el))
-</script>
-
-</body>
+</script></body>
 </html>
-
