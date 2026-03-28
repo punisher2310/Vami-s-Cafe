@@ -1,113 +1,325 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Vami's Cafe</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet"><style>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Poppins;background:#1b120b;color:#fff;overflow-x:hidden}
+body{
+  font-family:Poppins;
+  background:#120b07;
+  color:#fff;
+  overflow-x:hidden;
+}
 
 /* LOADER */
-#loader{position:fixed;width:100%;height:100%;background:#1b120b;display:flex;align-items:center;justify-content:center;z-index:9999}
-#loader h1{font-family:'Playfair Display'}
+#loader{
+  position:fixed;
+  inset:0;
+  background:#120b07;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+#loader h1{
+  font-family:'Playfair Display';
+  font-size:28px;
+  letter-spacing:2px;
+}
 
-.nav{display:flex;justify-content:space-between;padding:20px 40px;position:fixed;width:100%;background:#1b120b;z-index:1000}
-.nav a{color:#ccc;margin-left:15px;text-decoration:none}
+/* NAV */
+.nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:18px 40px;
+  background:rgba(0,0,0,0.4);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+.nav a{
+  color:#ddd;
+  margin-left:16px;
+  text-decoration:none;
+  font-size:14px;
+}
 
-.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover fixed}
-.hero h1{font-family:'Playfair Display';font-size:60px}
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover fixed;
+  position:relative;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+}
+.hero h1{
+  font-family:'Playfair Display';
+  font-size:64px;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:700px;
+}
+.hero p{
+  margin-top:12px;
+  color:#ccc;
+}
 
-.section{padding:80px 40px}
+/* SECTION */
+.section{
+  padding:90px 40px;
+  max-width:1100px;
+  margin:auto;
+}
+.section h2{
+  font-family:'Playfair Display';
+  font-size:36px;
+  margin-bottom:20px;
+}
 
 /* PARALLAX */
-.parallax{background:url('https://images.unsplash.com/photo-1511920170033-f8396924c348') center/cover fixed;height:300px;border-radius:20px}
+.parallax{
+  background:url('https://images.unsplash.com/photo-1511920170033-f8396924c348') center/cover fixed;
+  height:320px;
+  border-radius:18px;
+  margin:60px 0;
+}
 
-/* MENU */
-.filter{display:flex;gap:10px;margin-bottom:20px}
-.filter button{padding:8px 15px;border:none;background:#2a1f17;color:#fff;border-radius:20px;cursor:pointer}
-.filter button.active{background:#c8a27c;color:#000}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#2a1f17;padding:15px;border-radius:12px;transition:.3s}
-.card:hover{transform:translateY(-10px) scale(1.03)}
-.card img{width:100%;border-radius:10px;transition:.3s}
-.card img:hover{transform:scale(1.1)}
+/* MENU FILTER */
+.filter{
+  display:flex;
+  gap:10px;
+  margin-bottom:25px;
+}
+.filter button{
+  padding:8px 14px;
+  border:none;
+  background:#2a1f17;
+  color:#fff;
+  border-radius:20px;
+  cursor:pointer;
+}
+.filter button.active{
+  background:#c8a27c;
+  color:#000;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+.card{
+  background:#1c120d;
+  padding:12px;
+  border-radius:12px;
+  transition:0.3s;
+}
+.card:hover{
+  transform:translateY(-8px);
+}
+.card img{
+  width:100%;
+  border-radius:10px;
+  height:160px;
+  object-fit:cover;
+}
+.card h3{
+  margin-top:10px;
+  font-size:15px;
+}
 
 /* SLIDER */
-.slider-container{position:relative;overflow:hidden}
-.slider{display:flex;transition:0.5s}
-.slide{min-width:100%;text-align:center;padding:40px}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);background:#c8a27c;border:none;padding:10px;cursor:pointer}
+.slider-container{
+  position:relative;
+  overflow:hidden;
+  margin-top:20px;
+}
+.slider{
+  display:flex;
+  transition:0.5s ease;
+}
+.slide{
+  min-width:100%;
+  text-align:center;
+  padding:40px;
+  font-size:18px;
+}
+.arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:#c8a27c;
+  border:none;
+  padding:10px;
+  cursor:pointer;
+}
 .left{left:10px}
 .right{right:10px}
 
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25D366;padding:12px;border-radius:50%;color:#fff;text-decoration:none}
+/* FADE */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.8s;
+}
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
 
-.fade{opacity:0;transform:translateY(40px);transition:1s}
-.show{opacity:1;transform:translateY(0)}
-</style></head><body><div id="loader"><h1>Vami's Cafe</h1></div><div class="nav">
-<h2>Vami's Cafe</h2>
-<div><a href="#menu">Menu</a><a href="#contact">Contact</a></div>
-</div><div class="hero">
-<h1>Premium Cafe Experience</h1>
-</div><div class="section parallax"></div><div id="menu" class="section fade">
-<h2>Menu</h2>
-<div class="filter">
-<button onclick="filterMenu('all')" class="active">All</button>
-<button onclick="filterMenu('food')">Food</button>
-<button onclick="filterMenu('coffee')">Coffee</button>
-</div><div class="grid">
-<!-- FOOD -->
-<div class="card food"><img src="https://images.unsplash.com/photo-1601924582975-7e1c47d66d6d"><h3>Cheese Margherita Pizza</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349"><h3>Veg Burger</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1625944192163-8f2b5d2d7695"><h3>White Sauce Pasta</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1605475128025-3d6c0bca5b45"><h3>Grilled Sandwich</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1585238342028-4a3b8f6bdb89"><h3>Vanilla Shake</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307"><h3>Virgin Mint Mojito</h3></div>
-<div class="card food"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"><h3>Brownie Sundae</h3></div><!-- COFFEE --><div class="card coffee"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"><h3>Espresso</h3></div>
-<div class="card coffee"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096"><h3>Americano</h3></div>
-<div class="card coffee"><img src="https://images.unsplash.com/photo-1517705008128-361805f42e86"><h3>Cappuccino</h3></div>
-<div class="card coffee"><img src="https://images.unsplash.com/photo-1521305916504-4a1121188589"><h3>Latte Vanilla</h3></div>
+/* CONTACT */
+.contact a{
+  display:inline-block;
+  margin-top:10px;
+  color:#c8a27c;
+  text-decoration:none;
+}
+
+/* WHATSAPP */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  padding:12px;
+  border-radius:50%;
+  text-decoration:none;
+  color:#000;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader"><h1>Vami's Cafe</h1></div>
+
+<!-- NAV -->
+<div class="nav">
+  <h2 style="font-family:'Playfair Display'">Vami's Cafe</h2>
+  <div>
+    <a href="#menu">Menu</a>
+    <a href="#contact">Contact</a>
+  </div>
 </div>
-</div><div class="section fade">
-<h2>Reviews</h2>
-<div class="slider-container">
-<button class="arrow left" onclick="moveSlide(-1)">❮</button>
-<div class="slider" id="slider">
-<div class="slide">⭐️⭐️⭐️⭐️⭐️ Amazing vibe</div>
-<div class="slide">⭐️⭐️⭐️⭐️⭐️ Loved coffee</div>
-<div class="slide">⭐️⭐️⭐️⭐️⭐️ Great place</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <h1>Premium Cafe Experience</h1>
+    <p>Where coffee, comfort and conversations meet.</p>
+  </div>
 </div>
-<button class="arrow right" onclick="moveSlide(1)">❯</button>
+
+<!-- PARALLAX -->
+<div class="section">
+  <div class="parallax"></div>
 </div>
-</div><div id="contact" class="section fade">
-<h2>Contact</h2>
-<p>📍 Add Address</p>
-<p>📞 Add Number</p>
-<a href="https://www.google.com/maps?q=Kapai+Coffee+House+Kanpur" target="_blank">Open Map</a>
-<a href="https://instagram.com" target="_blank">Instagram</a>
-</div><a href="https://wa.me/91XXXXXXXXXX" class="whatsapp">💬</a>
+
+<!-- MENU -->
+<div id="menu" class="section fade">
+  <h2>Menu</h2>
+
+  <div class="filter">
+    <button class="active" onclick="filterMenu('all')">All</button>
+    <button onclick="filterMenu('food')">Food</button>
+    <button onclick="filterMenu('coffee')">Coffee</button>
+  </div>
+
+  <div class="grid">
+    <div class="card food"><img src="https://images.unsplash.com/photo-1601924582975-7e1c47d66d6d"><h3>Pizza</h3></div>
+    <div class="card food"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349"><h3>Burger</h3></div>
+    <div class="card food"><img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092"><h3>Brownie</h3></div>
+
+    <div class="card coffee"><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93"><h3>Espresso</h3></div>
+    <div class="card coffee"><img src="https://images.unsplash.com/photo-1517705008128-361805f42e86"><h3>Cappuccino</h3></div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="section fade">
+  <h2>Reviews</h2>
+
+  <div class="slider-container">
+    <button class="arrow left" onclick="moveSlide(-1)">❮</button>
+
+    <div class="slider" id="slider">
+      <div class="slide">⭐ Amazing ambience</div>
+      <div class="slide">⭐ Best coffee in town</div>
+      <div class="slide">⭐ Perfect hangout place</div>
+    </div>
+
+    <button class="arrow right" onclick="moveSlide(1)">❯</button>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section contact fade">
+  <h2>Contact</h2>
+  <p>📍 Kanpur, Uttar Pradesh</p>
+  <p>📞 +91 XXXXX XXXXX</p>
+
+  <a href="https://www.google.com/maps">Open Map</a><br>
+  <a href="https://instagram.com">Instagram</a>
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/91XXXXXXXXXX">💬</a>
 
 <script>
-window.onload=()=>{setTimeout(()=>{document.getElementById('loader').style.display='none'},1500)}
+// loader
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById('loader').style.display = 'none';
+  }, 1200);
+};
 
+// filter
 function filterMenu(cat){
-let items=document.querySelectorAll('.card');
-items.forEach(i=>{
-i.style.display=(cat==='all'||i.classList.contains(cat))?'block':'none'
-})
+  let items = document.querySelectorAll('.card');
+  items.forEach(i=>{
+    i.style.display = (cat==='all' || i.classList.contains(cat)) ? 'block':'none';
+  });
 }
 
-let index=0
+// slider FIXED
+let index = 0;
 function moveSlide(dir){
-let slides=document.querySelectorAll('.slide')
-index=(index+dir+slides.length)%slides.length
-document.getElementById('slider').style.transform=translateX(-${index*100}%)
+  let slider = document.getElementById('slider');
+  let slides = document.querySelectorAll('.slide');
+
+  index = (index + dir + slides.length) % slides.length;
+
+  slider.style.transform = `translateX(-${index * 100}%)`;
 }
 
-// SCROLL ANIMATION
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
-})
-document.querySelectorAll('.fade').forEach(el=>observer.observe(el))
-</script></body>
+// fade animation
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('show');
+  });
+});
+document.querySelectorAll('.fade').forEach(el=>observer.observe(el));
+</script>
+
+</body>
 </html>
